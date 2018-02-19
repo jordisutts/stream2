@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+</head>
+<body>
+    <h1>Data Visualisation</h1>
+    <div id="draw-here">
+    
+    </div>
+    
+    <script>
+    var w = 500;
+    var h = 400;
+    barWidth = 20;
+    barPadding = 1;
+    var dataArray = [450, 100, 100, 279, 500, 25, 350, 120, 80, 130,
+        110, 102, 375, 200, 175, 168, 180, 230, 205,
+    ];
+    var scale = d3.scale.log();
+    scale.domain([5, 1300])
+    scale.range([0, 500])
+    
+    var svg = d3.select("body").append("svg")
+          .attr("height","1000")
+          .attr("width","1500");
+
+    svg.selectAll("rect")
+        .data(dataArray)
+        .enter().append("rect")
+          .attr("height", function(d, i) {
+              return (d)
+              
+          })
+          .attr("width",barWidth, barPadding)
+          .attr("x", function(d, i) {return (i * 30) + 25})
+          .attr("y", function(d, i) {return 400 - (d)});
+    
+    svg.selectAll("text")
+        .data(dataArray)
+        .enter()
+        .append("text")
+        .text(function(d) {
+            return d;
+        })
+        .attr("text-anchor", "middle")
+        .attr("x", function(d, i) {
+            return i * (w / dataArray.length) + (w / dataArray.length - barPadding) / 2;
+        })
+        .attr("y", function(d) {
+            return h - d + 14;
+        })
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "11px")
+        .attr("fill", "white");
+    
+        
+    </script>
+    
+</body>
+</html>
